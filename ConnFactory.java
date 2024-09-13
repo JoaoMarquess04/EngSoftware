@@ -3,9 +3,9 @@ import  java.sql.DriverManager;
 
 public class ConnFactory {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/escola";
+    private static final String URL = "jdbc:mysql://127.0.0.1:3306/escola";
     private static final String USER = "root";
-    private static final String SENHA = "Joanajoao1973";
+    private static final String SENHA = "bemvindos123";
 
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String ERROBD = "Erro na conexão com o Banco de Dados: ";
