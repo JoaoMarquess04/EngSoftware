@@ -1,4 +1,4 @@
-import java.awt.BorderLayout;
+
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,14 +13,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 public class SistemaAcademico {
 
-    private static final String URL = "jdbc:mysql://localhost/escola";
+    private static final String URL = "jdbc:mysql://127.0.0.1:3306/escola";
     private static final String USER = "root";
     private static final String PASSWORD = "sua_senha";
 
@@ -83,43 +81,6 @@ public class SistemaAcademico {
                     JOptionPane.showMessageDialog(LoginFrame.this, "Database error.");
                 }
             }
-        }
-    }
-
-    private static class MainFrame extends JFrame {
-        private int userId;
-
-        public MainFrame(int userId) {
-            this.userId = userId;
-            setTitle("Main Application");
-            setSize(600, 400);
-            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            setLocationRelativeTo(null);
-
-            JPanel panel = new JPanel();
-            panel.setLayout(new BorderLayout());
-
-            JTable table = new JTable();
-            JScrollPane scrollPane = new JScrollPane(table);
-            panel.add(scrollPane, BorderLayout.CENTER);
-
-            try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
-                 Statement statement = connection.createStatement()) {
-
-                String query = "SELECT m.nome, nf.nota, nf.falta " +
-                               "FROM notas_faltas nf " +
-                               "JOIN materias m ON nf.materia_id = m.id " +
-                               "WHERE nf.usuario_id = " + userId;
-                ResultSet resultSet = statement.executeQuery(query);
-
-                table.setModel(new ResultSetTableModel(resultSet));
-
-            } catch (Exception ex) {
-                ex.printStackTrace();
-                JOptionPane.showMessageDialog(MainFrame.this, "Database error.");
-            }
-
-            add(panel);
         }
     }
 }
